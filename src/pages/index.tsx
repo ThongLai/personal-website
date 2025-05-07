@@ -41,7 +41,7 @@ export default function Home() {
                   <div className="absolute inset-0 border-4 border-primary rounded-full"></div>
                   <div className="absolute inset-2 bg-muted rounded-full overflow-hidden">
                     <Image
-                      src="https://raw.githubusercontent.com/ThongLai/personal-website/main/public/images/profiles/profile_pic.jpg"
+                      src="https://raw.githubusercontent.com/ThongLai/personal-website/main/public/images/profiles/profile_pic_tree.jpg"
                       alt="Profile"
                       fill
                       className="object-cover"

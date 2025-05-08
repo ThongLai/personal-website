@@ -24,14 +24,18 @@ export type SkillType = {
 };
 
 export const SKILLS: SkillType[] = [
-  { name: "JavaScript", icon: "logos:javascript" },
-  { name: "TypeScript", icon: "logos:typescript-icon" },
-  { name: "React", icon: "logos:react" },
-  { name: "Next.js", icon: "logos:nextjs-icon" },
-  { name: "Node.js", icon: "logos:nodejs-icon" },
   { name: "Python", icon: "logos:python" },
   { name: "TensorFlow", icon: "logos:tensorflow" },
-  { name: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
+  { name: "Pytorch", icon: "logos:pytorch" },
+  { name: "MATLAB", icon: "vscode-icons:file-type-matlab" },
+  { name: "C/C++", icon: "logos:c-plusplus" },
+  { name: "Java", icon: "logos:java" },
+  { name: "AWS", icon: "logos:aws" },
+  { name: "Azure", icon: "logos:azure" },
+  { name: "Docker", icon: "logos:docker" },
+  { name: "MySQL", icon: "logos:mysql" },
+  { name: "Next.js", icon: "logos:nextjs-icon" },
+  { name: "JavaScript", icon: "logos:javascript" },
 ];
 
 export const PROJECTS: ProjectType[] = [
@@ -104,8 +108,8 @@ export const PROJECTS: ProjectType[] = [
 
 export const BLOG_POSTS = [
   {
-    title: "Building Explainable AI Systems",
-    excerpt: "How to create AI systems that not only perform well but also explain their decision-making process.",
+    title: "What I learnt when building an Explainable AI (XAI) System and Evaluating their Explainability",
+    excerpt: "XAI: AI systems that not only perform well but also explain their decision-making process.",
     date: "2024-04-15",
     slug: "building-explainable-ai-systems",
   },

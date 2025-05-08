@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Mail, Phone } from "lucide-react";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formState, setFormState] = useState({
     name: "",
@@ -41,9 +42,17 @@ export default function ContactPage() {
         body: JSON.stringify(formState),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      const data = await response.json();
 
-      toast.success("Thanks for your message! I'll get back to you soon.");
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      toast({
+        title: "Success",
+        description: "Thanks for your message! I'll get back to you soon.",
+      });
+
       setFormState({
         name: "",
         email: "",
@@ -51,7 +60,11 @@ export default function ContactPage() {
         message: "",
       });
     } catch (error) {
-      toast.error("Failed to send message. Please try again.");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }

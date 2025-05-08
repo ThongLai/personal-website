@@ -8,8 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -26,15 +28,33 @@ export default function ContactPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thanks for your message! I'll get back to you soon.");
-    setFormState({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      toast.success("Thanks for your message! I'll get back to you soon.");
+      setFormState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -111,8 +131,8 @@ export default function ContactPage() {
                 />
               </div>
 
-              <Button type="submit" size="lg">
-                Send Message
+              <Button type="submit" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>

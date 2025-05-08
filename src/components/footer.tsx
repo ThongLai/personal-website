@@ -10,10 +10,10 @@ export function Footer() {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">YourName</h3>
+            <h3 className="text-lg font-semibold">Tom</h3>
             <p className="text-muted-foreground max-w-xs">
               Building innovative solutions with a focus on AI, machine learning,
-              and modern web technologies.
+              and modern technological products.
             </p>
           </div>
 
@@ -80,14 +80,15 @@ export function Footer() {
               </a>
             </div>
             <p className="text-muted-foreground">
-              your.email@example.com
+              laiminhthong1@gmail.com<br/>
+              U2259343@unimail.hud.ac.uk
             </p>
           </div>
         </div>
 
         <div className="mt-12 border-t pt-8">
           <p className="text-center text-muted-foreground text-sm">
-            &copy; {currentYear} YourName. All rights reserved.
+            &copy; {currentYear} Thong Minh Lai (Tom). All rights reserved.
           </p>
         </div>
       </div>

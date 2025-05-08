@@ -27,7 +27,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center">
-            <span className="font-bold text-xl text-primary">YourName</span>
+            <span className="font-bold text-xl text-primary">Tom Lai</span>
           </Link>
         </div>
 

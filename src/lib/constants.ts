@@ -113,16 +113,4 @@ export const BLOG_POSTS = [
     date: "2024-04-15",
     slug: "building-explainable-ai-systems",
   },
-  // {
-  //   title: "The Future of Web Development with React Server Components",
-  //   excerpt: "Exploring how React Server Components are changing the way we build web applications.",
-  //   date: "2024-03-21",
-  //   slug: "future-of-web-development-react-server-components",
-  // },
-  // {
-  //   title: "Optimizing Deep Learning Models for Production",
-  //   excerpt: "Best practices for deploying efficient and performant deep learning models in production environments.",
-  //   date: "2024-02-08",
-  //   slug: "optimizing-deep-learning-models-for-production",
-  // },
 ];

@@ -1,4 +1,4 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, FileText, Presentation, Play, Link as LinkIcon, BookOpen, BookCopy} from "lucide-react";
 import Image from "next/image";
 import { ProjectType } from "@/lib/constants";
 import { Button } from "./ui/button";
@@ -9,7 +9,51 @@ interface ProjectCardProps {
   project: ProjectType;
 }
 
+interface LinkButton {
+  href: string;
+  icon: JSX.Element;
+  label: string;
+}
+
 export function ProjectCard({ project }: ProjectCardProps) {
+  const links: LinkButton[] = [
+    project.github && {
+      href: project.github,
+      icon: <Github size={16} />,
+      label: "Code"
+    },
+    project.reference && {
+      href: project.reference,
+      icon: <BookCopy size={16} />,
+      label: "Reference"
+    },
+    project.demo && {
+      href: project.demo,
+      icon: <Play size={16} />,
+      label: "Demo"
+    },
+    project.thesis && {
+      href: project.thesis,
+      icon: <FileText size={16} />,
+      label: "Project Thesis"
+    },
+    project.poster && {
+      href: project.poster,
+      icon: <Presentation size={16} />,
+      label: "Academic Poster"
+    },
+    project.notebook && {
+      href: project.notebook,
+      icon: <BookOpen size={16} />,
+      label: "Notebook"
+    },
+    project.report && {
+      href: project.report,
+      icon: <ExternalLink size={16} />,
+      label: "Report"
+    }
+  ].filter((link): link is LinkButton => Boolean(link));
+
   return (
     <Card className="overflow-hidden flex flex-col h-full transition-all hover:shadow-md">
       <div className="relative h-48 w-full">
@@ -33,23 +77,21 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="flex justify-start gap-2">
-        {project.github && (
-          <Button variant="outline" size="sm" asChild className="gap-1">
-            <a href={project.github} target="_blank" rel="noopener noreferrer">
-              <Github size={16} />
-              <span>Code</span>
+      <CardFooter className="flex justify-start gap-2 flex-wrap">
+        {links.map((link) => (
+          <Button
+            key={link.label}
+            variant={link.label === "Code" ? "outline" : "default"}
+            size="sm"
+            asChild
+            className="gap-1"
+          >
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.icon}
+              <span>{link.label}</span>
             </a>
           </Button>
-        )}
-        {project.link && (
-          <Button variant="default" size="sm" asChild className="gap-1">
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <ExternalLink size={16} />
-              <span>Demo</span>
-            </a>
-          </Button>
-        )}
+        ))}
       </CardFooter>
     </Card>
   );

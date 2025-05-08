@@ -1,5 +1,6 @@
 import React from "react";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import Link from "next/link";
+import { SiGithub as Github, SiLinkedin as Linkedin, SiKaggle as Kaggle} from "react-icons/si";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Tom</h3>
+            <h3 className="text-lg font-semibold">This is Tom</h3>
             <p className="text-muted-foreground max-w-xs">
               Building innovative solutions with a focus on AI, machine learning,
               and modern technological products.
@@ -21,29 +22,29 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="text-muted-foreground hover:text-primary transition">
+                <Link href="/" className="text-muted-foreground hover:text-primary transition">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="text-muted-foreground hover:text-primary transition">
+                <Link href="/about" className="text-muted-foreground hover:text-primary transition">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/projects" className="text-muted-foreground hover:text-primary transition">
+                <Link href="/projects" className="text-muted-foreground hover:text-primary transition">
                   Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/blog" className="text-muted-foreground hover:text-primary transition">
+                <Link href="/blog" className="text-muted-foreground hover:text-primary transition">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="text-muted-foreground hover:text-primary transition">
+                <Link href="/contact" className="text-muted-foreground hover:text-primary transition">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -70,19 +71,29 @@ export function Footer() {
                 <Linkedin size={20} />
               </a>
               <a
-                href={SOCIAL_LINKS.twitter}
+                href={SOCIAL_LINKS.kaggle}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition"
-                aria-label="Twitter"
+                aria-label="Kaggle"
               >
-                <Twitter size={20} />
+                <Kaggle size={20} />
               </a>
             </div>
-            <p className="text-muted-foreground">
-              laiminhthong1@gmail.com<br/>
-              U2259343@unimail.hud.ac.uk
-            </p>
+            <div className="text-muted-foreground space-y-1">
+              <a 
+                href="mailto:laiminhthong1@gmail.com"
+                className="block hover:text-primary transition"
+              >
+                laiminhthong1@gmail.com
+              </a>
+              <a 
+                href="mailto:U2259343@unimail.hud.ac.uk"
+                className="block hover:text-primary transition"
+              >
+                U2259343@unimail.hud.ac.uk
+              </a>
+            </div>
           </div>
         </div>
 

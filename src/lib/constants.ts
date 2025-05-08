@@ -1,7 +1,7 @@
 export const SOCIAL_LINKS = {
   github: "https://github.com/ThongLai",
   linkedin: "https://www.linkedin.com/in/thong-lai/",
-  twitter: "https://twitter.com",
+  kaggle: "https://www.kaggle.com/minhthonglai",
 };
 
 export type ProjectType = {

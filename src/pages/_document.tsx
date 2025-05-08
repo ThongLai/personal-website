@@ -15,6 +15,7 @@ export default function Document() {
         {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#ffffff" />
       </Head>
+      
       <body className="antialiased">
         <Main />
         <NextScript />

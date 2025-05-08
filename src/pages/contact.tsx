@@ -40,7 +40,7 @@ export default function ContactPage() {
   return (
     <>
       <Head>
-        <title>Contact - Thong Minh Lai (Tom)</title>
+        <title>Contact - Tom</title>
         <meta name="description" content="Get in touch with me" />
       </Head>
       <div className="container py-12 md:py-20">

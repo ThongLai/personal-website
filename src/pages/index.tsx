@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Tom</title>
-        <meta name="description" content="Tom's Personal portfolio website showcasing his projects and skills in AI/ML, and products." />
+        <title>Tom Lai</title>
+        <meta name="description" content="Tom's personal portfolio website for showcasing projects and blogs." />
       </Head>
       <div>
         {/* Hero Section */}

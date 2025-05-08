@@ -4,6 +4,7 @@ import { ProjectType } from "@/lib/constants";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import type { ReactElement } from 'react';
 
 interface ProjectCardProps {
   project: ProjectType;
@@ -11,7 +12,7 @@ interface ProjectCardProps {
 
 interface LinkButton {
   href: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   label: string;
 }
 

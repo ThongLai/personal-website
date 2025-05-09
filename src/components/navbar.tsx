@@ -63,21 +63,28 @@ export function Navbar() {
       {/* Mobile navigation menu */}
       <div
         className={cn(
-          "md:hidden fixed inset-0 top-16 z-50 bg-background flex flex-col transition-transform duration-300 ease-in-out",
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+          "md:hidden fixed inset-0 top-16 z-40 bg-background/95 backdrop-blur-sm",
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         )}
       >
-        <div className="flex flex-col space-y-4 p-6">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div 
+          className={cn(
+            "absolute inset-x-0 top-0 z-50 overflow-hidden transition-transform duration-300 ease-in-out",
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="min-h-screen px-6 py-8 bg-background">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block w-full text-lg font-medium py-3 transition-colors hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </header>

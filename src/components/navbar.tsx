@@ -1,144 +1,130 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { ThemeToggle } from './theme-toggle';
+import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);   // ← NEW
   const pathname = usePathname();
-  
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  /* mark as mounted (runs only in the browser) */
+  useEffect(() => setMounted(true), []);
+
+  /* lock / unlock scroll */
+  useEffect(() => {
+    document.documentElement.classList.toggle('overflow-hidden', open);
+    return () => document.documentElement.classList.remove('overflow-hidden');
+  }, [open]);
+
+  /* ------------------------------------------------------------------ */
+  /* regular header (same as before)                                    */
+  /* ------------------------------------------------------------------ */
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center group">
-            <span className="font-bold text-xl text-primary transition-all duration-300 group-hover:text-primary/80">
-              Tom Lai
-            </span>
-          </Link>
-        </div>
+        <Link href="/" className="text-xl font-bold text-primary">Tom Lai</Link>
 
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-all duration-200 relative py-1",
-                  isActive 
-                    ? "text-primary" 
-                    : "hover:text-primary"
-                )}
-              >
-                {link.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
-                )}
-              </Link>
-            );
-          })}
+        <nav className="hidden items-center gap-6 md:flex">
+          {links.map(l => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={cn(
+                'relative py-1 text-sm font-medium transition-colors',
+                pathname === l.href ? 'text-primary' : 'hover:text-primary',
+              )}
+            >
+              {l.label}
+              {pathname === l.href && (
+                <span className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-primary" />
+              )}
+            </Link>
+          ))}
           <ThemeToggle />
         </nav>
 
-        {/* Mobile navigation toggle */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Toggle Menu"
-            className="md:hidden relative z-50 transition-transform hover:scale-110 active:scale-95"
-            onClick={toggleMenu}
+          <Button variant="ghost" size="icon"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen(p => !p)}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </div>
 
-      {/* Mobile navigation menu with backdrop overlay */}
-      <div 
-        className={cn(
-          "fixed inset-0 top-16 z-40 bg-background/80 backdrop-blur-md transition-opacity duration-300",
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-      />
-      <div 
-        className={cn(
-          "fixed inset-0 top-16 z-50 bg-background w-full h-[calc(100vh-4rem)] flex flex-col md:hidden transition-transform duration-300 ease-out",
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        )}
-      >
-        <div className="flex flex-col space-y-1 p-6 pt-10">
-          {links.map((link, i) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "relative block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300",
-                  isActive 
-                    ? "text-primary bg-primary/10" 
-                    : "hover:text-primary hover:bg-primary/5",
-                  isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
-                  // Add staggered delay based on index
-                  `transition-all duration-300 delay-[${i * 50}ms]`
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span>{link.label}</span>
-                {isActive && (
-                  <span className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-full" />
-                )}
-              </Link>
-            );
-          })}
-        </div>
-        
-        <div className="mt-auto p-6 border-t">
-          <div 
+      {/* ---------------------------------------------------------------- */}
+      {/* mobile backdrop + sheet rendered via portal AFTER mount          */}
+      {/* ---------------------------------------------------------------- */}
+      {mounted && createPortal(
+        <>
+          {/* Backdrop */}
+          <div
             className={cn(
-              "text-sm text-muted-foreground text-center transition-all duration-500",
-              isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              'fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity md:hidden',
+              open ? 'opacity-100' : 'pointer-events-none opacity-0',
+            )}
+            onClick={() => setOpen(false)}
+          />
+
+          {/* Slide-in sheet */}
+          <aside
+            className={cn(
+              'fixed inset-y-16 right-0 z-50 w-3/4 max-w-xs bg-background pt-5 pb-10 shadow-lg',
+              'transition-transform duration-333 ease-[cubic-bezier(.4,0,.2,1)] md:hidden',
+              open ? 'translate-x-0' : 'translate-x-full',
             )}
           >
-            <p>© {new Date().getFullYear()} Tom Lai</p>
-            <p className="mt-1">AI Engineer & Developer</p>
-          </div>
-        </div>
-      </div>
+            <ul className="flex flex-col space-y-1 px-6">
+              {links.map((l, i) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      'relative block rounded-lg py-3 px-4 text-lg font-medium transition-all duration-333',
+                      pathname === l.href
+                        ? 'bg-primary/10 text-primary'
+                        : 'hover:bg-primary/5 hover:text-primary',
+                      `delay-[${i * 50}ms]`,
+                    )}
+                  >
+                    {l.label}
+                    {pathname === l.href && (
+                      <span className="absolute inset-y-0 left-0 w-1 rounded-full bg-primary" />
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <footer className="mt-auto border-t px-6 pt-6 text-center text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Thong Minh Lai (Tom)
+              <br />
+              How are you doing? :-)
+            </footer>
+          </aside>
+        </>,
+        document.body,
+      )}
     </header>
   );
 }

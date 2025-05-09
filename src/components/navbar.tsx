@@ -112,9 +112,9 @@ export function Navbar() {
                     rel={l.rel}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      'relative block rounded-lg py-3 px-4 text-lg font-medium transition-all duration-333 inline-flex items-center gap-2',
+                      'relative block rounded-lg py-3 px-4 text-lg font-medium transition-all duration-333',
                       l.isExternal 
-                        ? 'text-primary hover:bg-primary/5' 
+                        ? 'inline-flex items-center gap-2 text-primary hover:bg-primary/5' 
                         : pathname === l.href
                           ? 'bg-primary/10 text-primary'
                           : 'hover:bg-primary/5 hover:text-primary',

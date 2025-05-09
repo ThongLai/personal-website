@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
@@ -15,6 +15,13 @@ const links = [
   { href: '/projects', label: 'Projects' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
+  { 
+    href: "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/ThongLai/tom-site/main/public/CV/Tom.pdf", 
+    label: "View My CV",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    isExternal: true
+  },
 ];
 
 export function Navbar() {
@@ -45,13 +52,16 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
+              target={l.target}
+              rel={l.rel}
               className={cn(
-                'relative py-1 text-sm font-medium transition-colors',
-                pathname === l.href ? 'text-primary' : 'hover:text-primary',
+                'relative py-1 text-sm font-medium transition-colors inline-flex items-center gap-1',
+                l.isExternal ? 'text-primary hover:text-primary/80' : pathname === l.href ? 'text-primary' : 'hover:text-primary',
               )}
             >
               {l.label}
-              {pathname === l.href && (
+              {l.isExternal && <ExternalLink className="h-3 w-3" />}
+              {pathname === l.href && !l.isExternal && (
                 <span className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-primary" />
               )}
             </Link>
@@ -98,17 +108,22 @@ export function Navbar() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
+                    target={l.target}
+                    rel={l.rel}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      'relative block rounded-lg py-3 px-4 text-lg font-medium transition-all duration-333',
-                      pathname === l.href
-                        ? 'bg-primary/10 text-primary'
-                        : 'hover:bg-primary/5 hover:text-primary',
+                      'relative block rounded-lg py-3 px-4 text-lg font-medium transition-all duration-333 inline-flex items-center gap-2',
+                      l.isExternal 
+                        ? 'text-primary hover:bg-primary/5' 
+                        : pathname === l.href
+                          ? 'bg-primary/10 text-primary'
+                          : 'hover:bg-primary/5 hover:text-primary',
                       `delay-[${i * 50}ms]`,
                     )}
                   >
                     {l.label}
-                    {pathname === l.href && (
+                    {l.isExternal && <ExternalLink className="h-4 w-4" />}
+                    {pathname === l.href && !l.isExternal && (
                       <span className="absolute inset-y-0 left-0 w-1 rounded-full bg-primary" />
                     )}
                   </Link>

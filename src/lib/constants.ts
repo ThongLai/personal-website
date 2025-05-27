@@ -99,10 +99,11 @@ export const PROJECTS: ProjectType[] = [
   },
   {
     title: "Work It: Exercise Recommender System",
-    description: "My role in this project was to specialize in developing an effective recommender system. The recommender system utilizes Filtering Collaboration to analyze user inputs and recommend 10 exercises based on ratings that closely match the user's preferences. The model is continuously improved through online batch updates based on user feedback and references. Throughout the project, we emphasized the importance of PLESI (Privacy, Legal and Ethical, Security, and Internationalization) and addressed the issue of different genders using the app to ensure inclusivity.",
-    tags: ["Python", "Flask", "ML", "Recommender System", "Collaboration Filtering", "Web App", "FastAPI", "MySQL"],
-    image: "https://private-user-images.githubusercontent.com/69896600/237730126-5e2c2841-74be-4a66-8739-c98899af2afd.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDY2NzI5NDcsIm5iZiI6MTc0NjY3MjY0NywicGF0aCI6Ii82OTg5NjYwMC8yMzc3MzAxMjYtNWUyYzI4NDEtNzRiZS00YTY2LTg3MzktYzk4ODk5YWYyYWZkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTA4VDAyNTA0N1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWU4YTQ3OGI1YWNhNTc1ZmMwNWMzZDJmMWNlMjQ3MjgxZWYwZmYwM2Q1MjE0YTMyZGI3NmYyYjdhYTY3MDg0NzImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.dYnpRC0PqDgFFv3XvnxZ4-3Q221lrqFdwws5vr-3Esc",
+    description: "Develop a collaborative-filtering recommender system that serves 10 personalized exercise suggestions, retraining in mini-batches from live user ratings. Deployed on AWS (EC2 for model serving, S3 for data storage, RDS for training data), the solution was built with strong PLESI focus—privacy, legal/ethical, security, and gender-inclusive design.",
+    tags: ["Python", "Flask", "ML", "Recommender System", "Collaboration Filtering", "Web App", "AWS", "S3 Bucket", "EC2", "RDS"],
+    image: "https://raw.githubusercontent.com/ThongLai/WorkIt.Gym-Recommender-Website/main/images/screenshots/ai_recommender.png",
     github: "https://github.com/ThongLai/WorkIt.Gym-Recommender-Website",
+    demo: "http://ec2-18-170-221-113.eu-west-2.compute.amazonaws.com/",
   },
 ];
 

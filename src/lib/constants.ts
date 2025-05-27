@@ -101,7 +101,7 @@ export const PROJECTS: ProjectType[] = [
     title: "Work It: Exercise Recommender System",
     description: "Develop a collaborative-filtering recommender system that serves 10 personalized exercise suggestions, retraining in mini-batches from live user ratings. Deployed on AWS (EC2 for model serving, S3 for data storage, RDS for training data), the solution was built with strong PLESI focus—privacy, legal/ethical, security, and gender-inclusive design.",
     tags: ["Python", "Flask", "ML", "Recommender System", "Collaboration Filtering", "Web App", "AWS", "S3 Bucket", "EC2", "RDS"],
-    image: "https://raw.githubusercontent.com/ThongLai/WorkIt.Gym-Recommender-Website/main/images/screenshots/ai_recommender.png",
+    image: "https://raw.githubusercontent.com/ThongLai/tom-site/main/public/images/screenshots/ai_recommender.png",
     github: "https://github.com/ThongLai/WorkIt.Gym-Recommender-Website",
     demo: "http://ec2-18-170-221-113.eu-west-2.compute.amazonaws.com/",
   },
